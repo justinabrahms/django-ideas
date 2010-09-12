@@ -37,7 +37,7 @@ def new(request):
 
 @login_required
 def edit(request, idea_pk):
-    idea = get_object_or_404(Idea, id=idea_pk, user=request.user)
+    idea = get_object_or_404(Idea, id=idea_pk, submitted_by=request.user)
     form = IdeaForm(request.POST or None, instance=idea)
     if request.method == "POST":
         if form.is_valid():
