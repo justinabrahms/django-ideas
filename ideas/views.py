@@ -42,8 +42,8 @@ def edit(request, idea_pk):
     if request.method == "POST":
         if form.is_valid():
             if form.save():
-                return HttpResponseRedirect("idea-index")
-    return render_to_response("ideas/edit.html", {"form":form},
+                return HttpResponseRedirect(reverse("idea-index"))
+    return render_to_response("ideas/new.html", {"form":form},
                               context_instance=RequestContext(request))
 
 @login_required
