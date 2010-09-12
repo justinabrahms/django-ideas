@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
@@ -22,6 +23,7 @@ def detail(request, idea_pk):
                                "idea":idea},
                               context_instance=RequestContext(request))
 
+@login_required
 def new(request):
     # @@@ Maybe should auto-vote your own things?
     initial = {'submitted_by':request.user.id}
@@ -33,6 +35,7 @@ def new(request):
     return render_to_response("ideas/new.html", {"form":form},
                               context_instance=RequestContext(request))
 
+@login_required
 def edit(request, idea_pk):
     idea = get_object_or_404(Idea, id=idea_pk, user=request.user)
     form = IdeaForm(request.POST or None, instance=idea)
@@ -43,6 +46,7 @@ def edit(request, idea_pk):
     return render_to_response("ideas/edit.html", {"form":form},
                               context_instance=RequestContext(request))
 
+@login_required
 def vote(request, idea_pk, amount=0):
     # @@@ Maybe shouldn"t be able to unvote on your own things.
     amount = int(amount)
