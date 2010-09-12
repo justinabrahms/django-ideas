@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.db.models import Sum
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
@@ -75,4 +76,11 @@ def vote(request, idea_pk, amount=0):
         msg = "You have successfully voted %s points." % amount
     messages.success(request, msg)
     return HttpResponseRedirect(reverse("idea-detail", kwargs={"idea_pk": idea.id}))
-        
+
+def popular(request):
+    ideas = Idea.objects.all().annotate(
+        num_points=Sum('ideasusers__points')
+    ).order_by('-num_points')
+    return render_to_response('ideas/popular.html',
+                              {'ideas':ideas},
+                              context_instance=RequestContext(request))

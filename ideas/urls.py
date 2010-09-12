@@ -8,5 +8,6 @@ urlpatterns = patterns("",
     ),
     url("(?P<idea_pk>\d+)/edit/$", "ideas.views.edit", name="idea-edit"),
     url("(?P<idea_pk>\d+)/$", "ideas.views.detail", name="idea-detail"),
+    url("popular/$", "ideas.views.popular", name="idea-popular"),
     url("new/$", "ideas.views.new", name="idea-new"),
 )
