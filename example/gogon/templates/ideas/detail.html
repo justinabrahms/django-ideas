@@ -1,0 +1,16 @@
+{% extends "site_base.html" %}
+{% block body %}
+amnt={{points}}
+Vote:
+<ul>
+  <li><a href="{% url idea-vote idea.id 0 %}">Unvote</a></li>
+  <li><a href="{% url idea-vote idea.id 1 %}">1</a></li>
+  <li><a href="{% url idea-vote idea.id 2 %}">2</a></li>
+  <li><a href="{% url idea-vote idea.id 3 %}">3</a></li>
+</ul>
+<h3>{{ idea.name }} by {{ idea.submitted_by }}</h3>
+<p>{{ idea.content }}</p>
+{% if can_edit %}
+<p><a href="{% url idea-edit idea.id %}">Edit</a></p>
+{% endif %}
+{% endblock %}

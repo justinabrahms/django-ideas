@@ -1,0 +1,16 @@
+{% extends "site_base.html" %}
+{% load idea_tags %}
+
+{% block body %}
+{% if object_list %}
+<h4>Ideas</h4>
+<ul>
+  {% for idea in object_list %}
+  <li><span class="vote_count">{% user_voted_for idea %} points allocated to</span> <a href="{% url idea-detail idea.id %}">{{ idea.name }}</a></li>
+  {% endfor %}
+</ul>
+<p><a href="{% url idea-new %}">Add another</a></p>
+{% else %}
+<p>No ideas yet. Perhaps you'd like to <a href="{% url idea-new %}">add one</a>?</p>
+{% endif %}
+{% endblock %}

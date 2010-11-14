@@ -1,0 +1,5 @@
+{% extends "site_base.html" %}
+{% block body %}
+<h3>{{ object.name }} by {{ object.submitted_by.username }}</h3>
+<p>{{ object.content }}</p>
+{% endblock %}

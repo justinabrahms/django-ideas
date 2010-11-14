@@ -1,0 +1,20 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+  {% if ideas %}
+    <table>
+      <tr>
+        <th>Idea</th>
+        <th>Idea Score</th>
+      </tr>
+      {% for idea in ideas %}
+      <tr>
+        <td>{{ idea }}</td>
+        <td>{% if idea.num_points %}<span class="idea_popularity">{{ idea.num_points }}</span>{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>There are no ideas.</p>
+  {% endif %}
+{% endblock %}
